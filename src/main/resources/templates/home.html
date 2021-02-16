@@ -39,7 +39,7 @@
 			<!-- Alert messages --->
 			
 			
-			  <div hidden class="alert alert-primary" id="message-success" type="hidden" th:text="${successEvent}"></div>
+			  <div class="alert alert-primary" id="message-success"  role="alert" th:text="${successEvent}" th:if="${successEvent}"></div>
 
               <div class="alert alert-danger" id="message-error" role="alert" th:text="${errorEvent}" th:if="${errorEvent}"></div>
                   
@@ -245,7 +245,7 @@
 	<script th:src="@{/js/popper.min.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 
-	<!-- Once document is ready -->
+	<!-- Once document is ready 
 	<script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -259,13 +259,10 @@
 	     if(success){
 		 	alert("Success: " + success);
 		 }
-	     
-	     
-	     
-	     
-
+	    
 		});
 	</script>
+	-->
 
 	<!-- For opening the note modal -->
 	<script type="text/javascript">
