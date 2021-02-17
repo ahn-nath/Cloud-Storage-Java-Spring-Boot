@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
@@ -26,7 +27,7 @@ public class SignupController {
 	}
 
 	@PostMapping()
-	public String signupUser(@ModelAttribute User user, Model model) {
+	public String signupUser(@ModelAttribute User user, Model model, RedirectAttributes redirectAttributes) {
 		String signupError = null;
 
 		// if input name exist, return error
@@ -44,7 +45,8 @@ public class SignupController {
 
 		// if there are no errors after calling method, show success message
 		if (signupError == null) {
-			model.addAttribute("signupSuccess", true);
+			redirectAttributes.addFlashAttribute("signupSuccess", true);
+			return "redirect:/login";
 
 		} else {
 			model.addAttribute("signupError", signupError);

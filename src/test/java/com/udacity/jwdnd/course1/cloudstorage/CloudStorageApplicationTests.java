@@ -3,7 +3,6 @@ package com.udacity.jwdnd.course1.cloudstorage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
