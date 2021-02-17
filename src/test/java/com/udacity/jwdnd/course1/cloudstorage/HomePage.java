@@ -90,17 +90,16 @@ public class HomePage {
 		Thread.sleep(5000);
 	}
 
-	// creating helper methods: create,view, edit, and delete for each case (switch)
-	public void createNote(WebDriver driver, String title, String description) throws InterruptedException { // submit
-																												// chat
-																												// form
-
+	// Notes
+	public void createNote(WebDriver driver, String title, String description) throws InterruptedException { 
+		
 		// go to notes tab and open modal
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].click()", notesTab);
 		new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(addNoteButton)).click();
 		Thread.sleep(5000);
 
+		// fill inputs and submit
 		noteTitleInput.sendKeys(title);
 		noteDescriptionInput.sendKeys(description);
 		submitNoteButton.click();
@@ -110,15 +109,20 @@ public class HomePage {
 		Thread.sleep(5000);
 	}
 
-	public void editNote(WebDriver driver, String title, String description) throws InterruptedException { // submit
-																											// chat form
-
+	public void editNote(WebDriver driver, String title, String description, boolean clear) throws InterruptedException { 
+																											
 		// go to notes tab and open modal
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].click()", notesTab);
 		new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(editNoteButton)).click();
 		Thread.sleep(5000);
+		
+		// clear input fields
+		if(clear){
+			clearNotes();
+		}
 
+		// fill inputs and submit
 		noteTitleInput.sendKeys(title);
 		noteDescriptionInput.sendKeys(description);
 		submitNoteButton.click();
@@ -145,9 +149,15 @@ public class HomePage {
 		Thread.sleep(5000);
 	}
 
-	// creating helper methods: create,view, edit, and delete for each case (switch)
+	public void clearNotes(){
+		noteTitleInput.clear();
+		noteDescriptionInput.clear();
+	}
+	
+	
+	// Credentials
 	public void createCredential(WebDriver driver, String url, String username, String password)
-			throws InterruptedException { // submit chat form
+			throws InterruptedException {
 
 		// go to notes tab and open modal
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -165,8 +175,8 @@ public class HomePage {
 		Thread.sleep(5000);
 	}
 
-	// creating helper methods: create,view, edit, and delete for each case (switch)
-	public void editCredential(WebDriver driver, String url, String username, String password)
+	
+	public void editCredential(WebDriver driver, String url, String username, String password, boolean clear)
 			throws InterruptedException { // submit chat form
 
 		// go to notes tab and open modal
@@ -175,6 +185,12 @@ public class HomePage {
 		new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(editCredentialButton)).click();
 		Thread.sleep(5000);
 
+		// clear input fields
+		if(clear) {
+			clearCredentials();
+		}
+		
+		// fill inputs and submit
 		credentialUrlInput.sendKeys(url);
 		credentialUsernameInput.sendKeys(username);
 		credentialPasswordInput.sendKeys(password);
@@ -201,5 +217,11 @@ public class HomePage {
 		jse.executeScript("arguments[0].click()", credentialsTab);
 		new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(deleteCredentialButton)).click();
 		Thread.sleep(5000);
+	}
+	
+	public void clearCredentials(){
+		credentialUrlInput.clear();
+		credentialUsernameInput.clear();
+		credentialPasswordInput.clear();
 	}
 }

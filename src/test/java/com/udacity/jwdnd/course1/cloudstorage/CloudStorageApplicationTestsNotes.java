@@ -11,16 +11,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class) // to define order of tests
-class CloudStorageApplicationTests {
+class CloudStorageApplicationTestsNotes {
 
 	@LocalServerPort
 	private int port;
@@ -73,58 +71,13 @@ class CloudStorageApplicationTests {
 	}
 
 	
-	public void updateNote(String title, String description) throws InterruptedException {
-		homePage.editNote(driver, title, description);
+	public void updateNote(String title, String description, boolean clear) throws InterruptedException {
+		homePage.editNote(driver, title, description, clear);
 	}
 
 	
-	// Credentials
-	private void createCredential(String url, String username, String password) throws InterruptedException {
-		homePage.createCredential(driver, url, username, password);
-		
-	}
-	
-	private void updateCredential(String url, String username, String password) throws InterruptedException {
-		homePage.editCredential(driver, url, username, password);
-		
-	}
-
-
 	@Test
 	@Order((1))
-	public void testNullUserAcess() {
-		driver.get("http://localhost:" + this.port + "/home");
-		Assertions.assertEquals("Login", driver.getTitle());
-
-		driver.get("http://localhost:" + this.port + "/result");
-		assertEquals("Login", driver.getTitle());
-	}
-	
-	
-	
-	@Test
-	@Order((2))
-	public void testSignupLoginAndSubmit() throws InterruptedException {
-
-		// sign up and login
-		userSignUpAndLogin();
-		assertEquals("Home", driver.getTitle());
-
-		// log out user
-		homePage.logOut(driver);
-
-		WebDriverWait wait = new WebDriverWait(driver, 25);
-		wait.until(driver -> driver.getTitle().equals("Login"));
-
-		// go to home page
-		driver.get("http://localhost:" + this.port + "/home");
-		assertEquals("Login", driver.getTitle());
-
-	}
-
-	
-	@Test
-	@Order((3))
 	public void testNoteCreate() throws InterruptedException {
 		// sign up and login first
 		userSignUpAndLogin();
@@ -143,7 +96,7 @@ class CloudStorageApplicationTests {
 	
 	
 	@Test
-	@Order((4))
+	@Order((2))
 	public void testNoteUpdate() throws InterruptedException {
 		// sign up and login first
 		userSignUpAndLogin();
@@ -151,8 +104,8 @@ class CloudStorageApplicationTests {
 		String title = "Life [updated]";
 		String description = "Life is beautiful if you try harder [updated]";
 
-		// create
-		updateNote(title, description);
+		// update
+		updateNote(" [updated]", " [updated]", false);
 		
 		// read
 		Note note = homePage.getFirstNote();
@@ -164,7 +117,7 @@ class CloudStorageApplicationTests {
 	
 	
 	@Test
-	@Order((5))
+	@Order((3))
 	public void testNoteDelete() throws InterruptedException {
 
 		// sign up and login first
@@ -179,67 +132,5 @@ class CloudStorageApplicationTests {
 		
 	}
 	
-
-	
-	@Test
-	@Order((6))
-	public void testCredentialCreate() throws InterruptedException {
-		// sign up and login first
-		userSignUpAndLogin();
-
-		String url = "http://localhost:8080/login";
-		String username = "ahnath";
-		String password = "12345";
-
-		// create
-		createCredential(url, username, password);
-		
-		// read
-		Credential credential = homePage.getFirstCredential();
-		assertEquals(url, credential.getUrl());
-		assertEquals(username, credential.getUsername());
-				
-	}
-	
-
-	@Test
-	@Order((7))
-	public void testCredentialUpdate() throws InterruptedException {
-		// sign up and login first
-		userSignUpAndLogin();
-
-		String url = "http://localhost:8080/home";
-		String username = "ahnath-updated";
-		String password = "123456";
-
-		// create
-		updateCredential(url, username, password);
-		
-		// read
-		Credential credential = homePage.getFirstCredential();
-		assertEquals(url, credential.getUrl());
-		assertEquals(username, credential.getUsername());
-	
-		
-		
-	}
-	
-
-	@Test
-	@Order((8))
-	public void testCredentialDelete() throws InterruptedException {
-
-		// sign up and login first
-		userSignUpAndLogin();
-		
-		// delete
-		homePage.deleteCredential(driver);
-	    Thread.sleep(5000);	
-	   
-		List<WebElement> deleteCredentialButtons = driver.findElements(By.id("delete-credential"));
-		Assertions.assertEquals(0, deleteCredentialButtons.size());
-		
-	}
-
 
 }
