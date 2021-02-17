@@ -2,15 +2,22 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +29,8 @@ import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import com.udacity.jwdnd.course1.cloudstorage.exceptions.DuplicatedFileException;
 
 @Controller
-public class FilesController {
+@ControllerAdvice
+public class FilesController  {
 	@Autowired
 	FileService fileService;
 	@Autowired
@@ -30,7 +38,7 @@ public class FilesController {
 
 	 
 	@PostMapping("/files")
-	public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth, RedirectAttributes redirectAttributes) throws IOException {
+	public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth, RedirectAttributes redirectAttributes) throws IOException, SizeLimitExceededException {
 
 		try {
 			// user data 
@@ -70,9 +78,19 @@ public class FilesController {
 			redirectAttributes.addFlashAttribute("errorEvent", "File already exists!");
 		}
 
+		
+		catch (MaxUploadSizeExceededException e) {
+			redirectAttributes.addFlashAttribute("errorEvent", "File uploaded is of bigger size than allowed");
+		}
+		
+		catch(IllegalStateException e) {
+			redirectAttributes.addFlashAttribute("errorEvent", "File uploaded is of bigger size than allowed");
+		}
+
 		return "redirect:/home";
 	}
 
+	
 	
 	@GetMapping("/files/delete/{id}")
 	public String deleteCredentials(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
@@ -96,6 +114,15 @@ public class FilesController {
 	  }
 	
 	
+	  //handle exception
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+		public String handleMaxSizeException(RedirectAttributes redirectAttributes, MaxUploadSizeExceededException exc, HttpServletRequest request, HttpServletResponse response){
+		redirectAttributes.addFlashAttribute("errorEvent", "File uploaded is of bigger size than allowed");
+		
+		return "redirect:/home";
+	}
+	
+	  
 	private boolean checkIfDuplicated(String filename, Integer userId) {
 		String storedName = fileService.getFileByName(filename, userId);
 
