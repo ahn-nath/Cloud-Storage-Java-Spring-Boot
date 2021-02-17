@@ -33,7 +33,6 @@ public class FilesController {
 	public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload, Authentication auth, RedirectAttributes redirectAttributes) throws IOException {
 
 		try {
-			
 			// user data 
 			User user = userService.getUser(auth.getName());
 

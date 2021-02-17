@@ -38,19 +38,16 @@
 			
 			<!-- Alert messages --->
 			
-			
 			  <div class="alert alert-primary" id="message-success"  role="alert" th:text="${successEvent}" th:if="${successEvent}"></div>
 
               <div class="alert alert-danger" id="message-error" role="alert" th:text="${errorEvent}" th:if="${errorEvent}"></div>
-                  
-                   
-			
 			
 			<!-- Alert messages --->
 			
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-files"
 					role="tabpanel" aria-labelledby="nav-files-tab">
+					
 					<form action="#" enctype="multipart/form-data"
 						th:action="@{/files}" method="POST">
 						<div class="container">
@@ -68,6 +65,7 @@
 							</div>
 						</div>
 					</form>
+					
 					<div class="table-responsive">
 						<table class="table table-striped" id="fileTable">
 							<thead>
@@ -89,6 +87,7 @@
 						</table>
 					</div>
 				</div>
+				
 				<div class="tab-pane fade" id="nav-notes" role="tabpanel"
 					aria-labelledby="nav-notes-tab">
 					<button style="margin: 0.25em;" type="button"
@@ -109,12 +108,14 @@
 									<td>
 										<button id="edit-note" type="button" class="btn btn-success"
 											th:onclick="javascript:showNoteModal([[${note.noteId}]], [[${note.noteTitle}]], [[${note.noteDescription}]])">Edit</button>
+										
 										<a id="delete-note" class="btn btn-danger"
 										th:href="@{/notes/delete/{id}(id=${note.noteId})}">Delete</a>
 									</td>
-									<th scope="row" id="note-title" th:text="${note.noteTitle}">Example Note
+									
+									<th scope="row" id="note-title-text" th:text="${note.noteTitle}">Example Note
 										Title</th>
-									<td id="note-description" th:text="${note.noteDescription}">Example Note
+									<td id="note-description-text" th:text="${note.noteDescription}">Example Note
 										Description</td>
 								</tr>
 							</tbody>
@@ -135,6 +136,7 @@
 								<div class="modal-body">
 									<form action="#" th:action="@{/notes}" method="POST">
 										<input type="hidden" name="stringId" id="note-id">
+										
 										<div class="form-group">
 											<label for="note-title" class="col-form-label">Title</label>
 											<input type="text" name="noteTitle" class="form-control"
@@ -182,11 +184,11 @@
 										<a id="delete-credential" class="btn btn-danger"
 										th:href="@{/credentials/delete/{id}(id=${credential.credentialId})}">Delete</a>
 									</td>
-									<th id="credential-url" th:text="${credential.url}" scope="row">Example
+									<th id="credential-url-text" th:text="${credential.url}" scope="row">Example
 										Credential URL</th>
-									<td id = "credential-username" th:text="${credential.username}">Example Credential
+									<td id = "credential-username-text" th:text="${credential.username}">Example Credential
 										Username</td>
-									<td id = "credential-password" th:text="${credential.password}">Example Credential
+									<td id = "credential-password-text" th:text="${credential.password}">Example Credential
 										Password</td>
 								</tr>
 							</tbody>
@@ -245,27 +247,10 @@
 	<script th:src="@{/js/popper.min.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 
-	<!-- Once document is ready 
-	<script type="text/javascript">
-	$(document).ready(function(){
-		
-	     var error = $("#message-error").text();
-	     var success = $("#message-success").text();
-	     
-	     if(error){
-			 alert("Error: " + error);
-	     }
-	     
-	     if(success){
-		 	alert("Success: " + success);
-		 }
-	    
-		});
-	</script>
-	-->
 
 	<!-- For opening the note modal -->
 	<script type="text/javascript">
+	
 		// For opening the note modal
 		function showNoteModal(noteId, noteTitle, noteDescription) {
 			$('#note-id').val(noteId ? noteId : '');
@@ -283,6 +268,7 @@
 			$('#credential-password').val(plain_password ? plain_password : '');
 			$('#credentialModal').modal('show');
 		}
+		
 	</script>
 </body>
 </html>
