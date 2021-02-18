@@ -1,8 +1,6 @@
 # SuperDuperDrive Cloud Storage
 ### _Store and manage your files, notes, and credentials_
 
- [//]: <> (![Featured image](./featured_.png)
-
 It is a cloud storage web application with personal information management features. The system includes three user-facing features:
 1.	Simple File Storage: upload/download/remove files
 2.	Note Management: add/update/remove text notes
