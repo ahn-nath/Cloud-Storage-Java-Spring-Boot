@@ -109,7 +109,7 @@ public class FilesController  {
 	  //handle exception
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 		public String handleMaxSizeException(RedirectAttributes redirectAttributes, MaxUploadSizeExceededException exc, HttpServletRequest request, HttpServletResponse response){
-		redirectAttributes.addFlashAttribute("errorEvent", "File uploaded is of bigger size than allowed. Max file size permitted is 5MB");
+		redirectAttributes.addFlashAttribute("errorEvent", "The file uploaded is of bigger size than allowed. Max file size permitted is 5MB");
 		
 		return "redirect:/home";
 	}
