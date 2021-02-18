@@ -20,15 +20,15 @@ Security features and connecting the front-end to database data and actions. The
 
 ### The Front-End
 Graphical interfaces the user can interact with:
-##### 1. Login Page
+#### 1. Login Page
 •	Everyone can access this page.
 •	Shows login errors, like invalid username/password.
 
-##### 2. Signup Page
+#### 2. Signup Page
 •	Everyone can access this page.
 •	Validates that the username supplied does not already exist in the application.
 
-##### 3. Home Page
+#### 3. Home Page
 •	The home page is the center of the application and hosts the three required pieces of functionality. The web page presents them as three tabs that can be clicked through by the user:
 
 **i. Files**
