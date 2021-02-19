@@ -248,8 +248,19 @@
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 
 
+
+
 	<!-- For opening the note modal -->
 	<script type="text/javascript">
+	
+		// for checking file size before uplaod
+	    $('#fileUpload').bind('change', function() {
+	        //this.files[0].size gets the size of your file.
+	        if(this.files[0].size>5000000){
+	        alert("File uploaded is of bigger size than allowed. Max file size permitted is 5MB");
+	        this.value = '';
+	        }
+	    });
 	
 		// For opening the note modal
 		function showNoteModal(noteId, noteTitle, noteDescription) {
