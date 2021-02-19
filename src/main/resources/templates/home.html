@@ -15,6 +15,8 @@
 </head>
 
 <body class="text-monospace text-uppercase">
+
+	<!-- Banner --->
     <div class="highlight-blue mb-4">
         <div class="container">
             <div class="intro">
@@ -22,7 +24,9 @@
                 <p class="text-monospace text-center"><br><strong><em>Store and manage your files, notes, and credentials.&nbsp;</em></strong><br><strong>SuperDuperDrive&nbsp;</strong>is a cloud storage web application with personal information management features.&nbsp;<br><br></p>
             </div>
             <div class="buttons"><a class="btn btn-primary text-monospace" role="button" href="https://github.com/ahn-nath/Cloud-Storage-Java-Spring-Boot" target="_blank">repository on github</a></div>
-        </div>
+		</div>
+		
+	<!-- Main container --->
     </div><div class="container">
 		<div id="logoutDiv">
 			<form action="#" th:action="@{/logout}" method="POST">
@@ -32,13 +36,12 @@
 		
 		<div id="contentDiv" style="clear: right;">
 			
+			<!-- Nav tabs --->
 			<nav style="clear: right;">
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-			
 					<a class="nav-item nav-link active" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab" aria-controls="nav-files" aria-selected="true">Files</a> 
 						
-					<a class="nav-item nav-link" id="nav-notes-tab" data-toggle="tab" href="#nav-notes" role="tab" aria-controls="nav-notes" aria-selected="false">Notes</a> 
-						
+					<a class="nav-item nav-link" id="nav-notes-tab" data-toggle="tab" href="#nav-notes" role="tab" aria-controls="nav-notes" aria-selected="false">Notes</a> 	
 						
 					<a class="nav-item nav-link" id="nav-credentials-tab" data-toggle="tab" href="#nav-credentials" role="tab" aria-controls="nav-credentials" aria-selected="false">Credentials</a>
 				</div>
@@ -52,6 +55,7 @@
 			
 			<!-- Alert messages --->
 			
+			<!-- Files tab --->
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
 					
@@ -92,6 +96,7 @@
 					</div>
 				</div>
 				
+				<!-- Notes tab --->
 				<div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
 					<button style="margin: 0.25em;" type="button" class="btn btn-info float-right" id="add-note" onclick="showNoteModal()">
 						+ Add a New Note</button>
@@ -122,6 +127,7 @@
 						</table>
 					</div>
 
+					<!-- Notes modal --->
 					<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -131,6 +137,7 @@
 										<span aria-hidden="true">×</span>
 									</button>
 								</div>
+
 								<div class="modal-body">
 									<form action="#" th:action="@{/notes}" method="POST">
 										<input type="hidden" name="stringId" id="note-id">
@@ -146,6 +153,7 @@
 										<button id="noteSubmit" type="submit" class="d-none"></button>
 									</form>
 								</div>
+
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 									<button id="submit-note" type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
@@ -153,7 +161,10 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
+
+				<!--Credentials tab --->
 				<div class="tab-pane fade" id="nav-credentials" role="tabpanel" aria-labelledby="nav-credentials-tab">
 					<button style="margin: 0.25em;" type="button" class="btn btn-info float-right" id="add-credential" onclick="showCredentialModal()">
 						+ Add a New Credential</button>
@@ -185,6 +196,7 @@
 						</table>
 					</div>
 
+					<!-- Credentials modal --->
 					<div class="modal fade" id="credentialModal" tabindex="-1" role="dialog" aria-labelledby="credentialModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -219,12 +231,13 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+	<!-- Footer --->
 	<div class="footer-basic">
         <footer>
             <div class="social"><a href="https://github.com/ahn-nath/" target="_blank"><i class="icon ion-social-github"></i></a><a href="https://www.linkedin.com/in/nathaly-toledo/" target="_blank"><i class="icon ion-social-linkedin"></i></a><a href="https://twitter.com/toledo_nathaly"><i class="icon ion-social-twitter"></i></a></div>
@@ -232,12 +245,13 @@
         </footer>
     </div>
 
+
 	<script th:src="@{/js/jquery-slim.min.js}"></script>
 	<script th:src="@{/js/popper.min.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 
 
-	<!-- For opening the note modal -->
+	<!-- JS functions -->
 	<script type="text/javascript">
 	
 		// for checking file size before uplaod
@@ -249,7 +263,7 @@
 	        }
 	    });
 	
-		// For opening the note modal
+		// For opening the notes modal
 		function showNoteModal(noteId, noteTitle, noteDescription) {
 			$('#note-id').val(noteId ? noteId : '');
 			$('#note-title').val(noteTitle ? noteTitle : '');

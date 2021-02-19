@@ -8,9 +8,14 @@
 
         <title>Login</title>
     </head>
+
     <body class="text-monospace text-uppercase">
+
+        <!-- Main container --->
         <div class="container justify-content-center w-25 p-4" style="background-color: #eeeeee; margin-top: 5em;">
             <h1 class="display-5">Login</h1>
+
+            <!-- Login form --->
             <form action="#" th:action="@{/login}"  method="POST">
              <div th:if="${signupSuccess}" id="success-msg" class="alert alert-success">
                     Successful registration. Welcome!
@@ -36,6 +41,8 @@
             <div class="form-group" style="margin-top: 0.5em;">
                <label><a id="signup-link" th:href="@{/signup}">Click here to sign up</a></label>
             </div>
+
         </div>
+
     </body>
 </html>
