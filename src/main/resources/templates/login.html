@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
         <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
 
         <title>Login</title>
     </head>
-    <body class="p-3 mb-2 bg-light text-black">
-        <div class="container justify-content-center w-25 p-3" style="background-color: #eeeeee; margin-top: 5em;">
+    <body class="text-monospace text-uppercase">
+        <div class="container justify-content-center w-25 p-4" style="background-color: #eeeeee; margin-top: 5em;">
             <h1 class="display-5">Login</h1>
             <form action="#" th:action="@{/login}"  method="POST">
              <div th:if="${signupSuccess}" id="success-msg" class="alert alert-success">

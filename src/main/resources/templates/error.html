@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
-
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}">
+	
     <title>Error</title>
 </head>
-<body class="p-3 mb-2 bg-light text-black">
+<body class="text-monospace text-uppercase">
 <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
-    <div class="alert alert-danger fill-parent">
+    <div class="alert alert-danger fill-parent p-4">
         <h1 class="display-5">Error</h1>
         <span>Something went wrong! Click <a th:href="@{/home}">here</a> to return.</span>
     </div>
