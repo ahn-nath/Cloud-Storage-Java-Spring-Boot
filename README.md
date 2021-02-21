@@ -10,15 +10,15 @@ It is a cloud storage web application with personal information management featu
 
 ## Features
 The layers of the application:
-•	The back-end with Spring Boot.
-•	The front-end with Thymeleaf.
-•	Application tests with Selenium.
+-	The back-end with Spring Boot.
+-	The front-end with Thymeleaf.
+-	Application tests with Selenium.
 
 ### The Back-End
 Security features and connecting the front-end to database data and actions. The app covers:
-•	Managing User Access with Spring Security.
-•	Handling Front-End Calls with Controllers.
-•	Making Calls to the Database with MyBatis Mappers.
+-	Managing User Access with Spring Security.
+-	Handling Front-End Calls with Controllers.
+-	Making Calls to the Database with MyBatis Mappers.
 
 ### The Front-End
 Graphical interfaces the user can interact with:
